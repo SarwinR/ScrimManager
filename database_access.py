@@ -84,7 +84,7 @@ async def load_leaderboard(self, ctx, mode):
 
     top_10_data = list(ordered_data)
     real = top_10_data.reverse()
-    print(top_10_data)
+    #print(top_10_data)
     #print(real)
 
     '''
@@ -101,7 +101,7 @@ async def load_leaderboard(self, ctx, mode):
     for d in top_10_data:
         user = await self.client.fetch_user(int(d))
         print("{} - {}".format(user.name, dict_data[d]))
-    #leaderboard_embed.add_field(name=user.name ,value=dict_data[d], inline=False)
+        leaderboard_embed.add_field(name=user.name ,value=dict_data[d], inline=False)
 
     print("done")
 

@@ -71,19 +71,25 @@ class WinCounter(commands.Cog):
 				await remove_win(self, ctx, amount, game_mode, player_1)
 			else:
 				await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
-
-	@commands.has_permissions(administrator=True)
+				
+	
+	#@commands.has_permissions(administrator=True)
 	@commands.command()
 	async def winner(self, ctx, game_mode, player_1:discord.Member, player_2:discord.Member=None, player_3:discord.Member=None, player_4:discord.Member=None):
-		global winRequestPlayerID
-		if(winRequestPlayerID != None):
-			await ctx.reply("```❗ [ON GOING PROCESS]```")
-		else:
-			if(game_mode.lower() in ['s', 'd', 't', 'tournament']):
-				winRequestPlayerID = ctx.author.id
-				await arrange_winners(self, ctx, game_mode, player_1, player_2, player_3, player_4)
+
+		role = ctx.guild.get_role(910400243596664843)
+		if (role in ctx.author.roles):
+			global winRequestPlayerID
+			if(winRequestPlayerID != None):
+				await ctx.reply("```❗ [ON GOING PROCESS]```")
 			else:
-				await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
+				if(game_mode.lower() in ['s', 'd', 't', 'tournament']):
+					winRequestPlayerID = ctx.author.id
+					await arrange_winners(self, ctx, game_mode, player_1, player_2, player_3, player_4)
+				else:
+					await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
+		else:
+			await ctx.reply("The role Win Manager is needed to add roles!")
 
 	@commands.command()
 	async def profile(self, ctx, player:discord.Member=None):

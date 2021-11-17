@@ -1,6 +1,6 @@
 import os
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 from keep_alive import keep_alive
 import database_access as db
 
@@ -26,7 +26,6 @@ async def unload(ctx, extension):
 for filename in os.listdir('./cogs'):
 	if filename.endswith('.py'):
 		client.load_extension(f'cogs.{filename[:-3]}')
-
 
 keep_alive()
 client.run(discord_token)
