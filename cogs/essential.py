@@ -10,6 +10,8 @@ class Essential(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_ready(self):
+		activity = discord.Game(name="Scrims Manager", type=3)
+		await self.client.change_presence(status=discord.Status.idle, activity=activity)
 		print("Essential Module Ready")
 
 	@commands.Cog.listener()
