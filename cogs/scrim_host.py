@@ -37,7 +37,7 @@ class ScrimHost(commands.Cog):
 				await get_queued_player_list(self)
 
 				queue_msg = discord.Embed(title="__**QUEUE UP**__", description="Please click on the raised hand below [✋] to queue up for the code. \nThe code will be sent to you. **Check your DM**", color=0x14fffb)
-				queue_msg.set_footer(text="Thanks. -sarwin")
+				queue_msg.set_footer(text="Made with ❤ by sarwin")
 				
 				await queue_up_channel.purge(limit=10)
 
@@ -86,7 +86,7 @@ class ScrimHost(commands.Cog):
 	#scrim command⠀
 
 	@commands.command()
-	async def scrim(self, ctx, game_code, game_mode, game_no, region = "Asia"):
+	async def scrim(self, ctx, game_code, game_mode, region = "Asia"):
 		if(ctx.channel.id != code_request_ch_id):
 			return
 
@@ -100,11 +100,11 @@ class ScrimHost(commands.Cog):
 		code_leak_msg.clear_fields()
 		code_leak_msg.add_field(name="GAME CODE", value=game_code, inline=True)
 		code_leak_msg.add_field(name="GAME MODE", value=game_mode, inline=True)
-		code_leak_msg.add_field(name="GAME INDEX", value=game_no, inline=True)
+		#code_leak_msg.add_field(name="GAME INDEX", value=game_no, inline=True)
 		code_leak_msg.add_field(name="SERVER", value=region, inline=True)
 
 		code_leak_msg.add_field(name="NOTE", value="Please review the rules while waiting in queue [#📖-scrims-rule]", inline=False)
-		code_leak_msg.set_footer(text="#RespectRules -sarwin")
+		code_leak_msg.set_footer(text="Made with ❤ by sarwin . #RespectRules")
 
 		code_leak_ref = await ctx.send(embed=code_leak_msg)
 		await code_leak_ref.add_reaction("🟩")
@@ -117,7 +117,7 @@ class ScrimHost(commands.Cog):
 		print(error)
 
 async def get_queued_player_list(self):
-	queued_players = "**Player who viewed the code:**\n"
+	queued_players = "**Players who viewed the code:**\n"
 	users_id = db.keys()
 	for id in users_id: 
 		try:

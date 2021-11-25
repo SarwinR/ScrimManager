@@ -14,9 +14,10 @@ class Essential(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
-		if(message.author != self.client.user):
-			if (message.channel.id == item_shop_ch_id):
-				await send_code_promotion(message.channel)
+		pass
+		#if(message.author != self.client.user):
+			#if (message.channel.id == item_shop_ch_id):
+				#await send_code_promotion(message.channel)
 
 		#await self.client.process_commands(message)
 
@@ -29,10 +30,10 @@ class Essential(commands.Cog):
 
 	@commands.command()
 	async def promote(self, ctx):
-		if(ctx.author.id == 328229316301422592 or ctx.author.id == 607434055973077002):
+		if(ctx.author.id == 328229316301422592):
 			await send_code_promotion(ctx.channel)
 		else:
-			await ctx.send("You have to be sarwin or ishfaque to use this command :|")
+			await ctx.send("You have to be sarwin to use this command :|")
 
 
 async def send_code_promotion(channel):
