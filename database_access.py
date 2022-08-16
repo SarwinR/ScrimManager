@@ -99,9 +99,11 @@ async def load_leaderboard(self, ctx, mode):
 
     leaderboard_embed=discord.Embed(title="{} LEADERBOARD".format(game_mode_display),color=0xe100ff)
     for d in top_10_data:
-        user = await self.client.fetch_user(int(d))
-        print("{} - {}".format(user.name, dict_data[d]))
-        leaderboard_embed.add_field(name=user.name ,value=dict_data[d], inline=False)
+        if(dict_data[d] != 0):
+            user = await self.client.fetch_user(int(d))
+			#print("{} - {}".format(user.name, dict_data[d])) - Future me please use this to generate leaderboard.
+            leaderboard_embed.add_field(name=user.name ,value=dict_data[d], inline=False)
+			#print(d)
 
     print("done")
 

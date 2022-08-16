@@ -10,7 +10,7 @@ code_leak_id = 0
 code_request_ch_id = 803677123680141312
 queue_up_ch_id = 829214996226899999
 log_ch_id = 803883330814738442
-scrim_chat_ch_id = 803203394650767362
+scrim_chat_ch_id = 916815888244670515
 
 class ScrimHost(commands.Cog):
 

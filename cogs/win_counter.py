@@ -59,18 +59,23 @@ class WinCounter(commands.Cog):
 		else:
 			await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
 
-	@commands.has_permissions(administrator=True)
+	#@commands.has_permissions(administrator=True)
 	@commands.command()
 	async def removewin(self, ctx, amount:int, game_mode, player_1:discord.Member):
-		global winRequestPlayerID
-		if(winRequestPlayerID != None):
-			await ctx.reply("```❗ [ON GOING PROCESS]```")
-		else:
-			if(game_mode.lower() in ['s', 'd', 't', 'tournament']):
-				winRequestPlayerID = ctx.author.id
-				await remove_win(self, ctx, amount, game_mode, player_1)
+
+		role = ctx.guild.get_role(910400243596664843)
+		if (role in ctx.author.roles):
+			global winRequestPlayerID
+			if(winRequestPlayerID != None):
+				await ctx.reply("```❗ [ON GOING PROCESS]```")
 			else:
-				await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
+				if(game_mode.lower() in ['s', 'd', 't', 'tournament']):
+					winRequestPlayerID = ctx.author.id
+					await remove_win(self, ctx, amount, game_mode, player_1)
+				else:
+					await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
+		else:
+			await ctx.reply("The role Win Manager is needed to remove wins!")
 				
 	
 	#@commands.has_permissions(administrator=True)
@@ -89,7 +94,7 @@ class WinCounter(commands.Cog):
 				else:
 					await ctx.reply("Please select a valid gamemode s/d/t/tournamant")
 		else:
-			await ctx.reply("The role Win Manager is needed to add roles!")
+			await ctx.reply("The role Win Manager is needed to add wins!")
 
 	@commands.command()
 	async def profile(self, ctx, player:discord.Member=None):
@@ -169,6 +174,9 @@ async def arrange_winners(self, ctx, game_mode, player_1, player_2, player_3, pl
 				for id in list_id:
 					if(id != "none"):
 						await fb.update_user_profile(id, win_count[count])
+						info = await fb.load_user_profile(id)
+						await cache_data(id, info)
+
 						if(win_totals[count] > 0):
 							name, id, emoji = check_rank(win_totals[count])
 							if(id != None):
@@ -257,7 +265,7 @@ def check_rank(wins:int):
 	
 	ranks = ["Unranked", "Bronze", "Silver", "Gold", "Diamond", "Emerald", "Pink Star", "Best Player!"]
 	ranks_id = [None, 806737098098737182, 806548115183370241, 806737694759321602, 806915515683045376, 806916098854879262, 809282944077135913, None]
-	ranks_emote_id = ["<:unranked:854645341461807134>","<:Bronze:854663144474804244>" ,"<:Silver:854663144319090689>" , "<:Gold:854663144428797954>", "<:Diamond:854663144373485598>", "<:Emerald:854663144395243520>", "<:PinkStar:854663144538374164>", "<a:animatedfire:827187026163531857>" ]
+	ranks_emote_id = ["<:unranked:903211279798378498>","<:Bronze:903210903749673010>" ,"<:Silver:903211280066814014>" , "<:Gold:903210903779029012>", "<:Diamond:903210903829364736>", "<:Emerald:903210903628038144>", "<:PinkStar:917068996115841024>", "<:PinkStar:917068996115841024>" ]
 
 	return ranks[id],ranks_id[id],ranks_emote_id[id]
 
